@@ -1,0 +1,17 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradM" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#03737D"/>
+      <stop offset="35%" stop-color="#0EA3AC"/>
+      <stop offset="68%" stop-color="#8ED2D5"/>
+      <stop offset="100%" stop-color="#EAF7F8"/>
+    </linearGradient>
+    <linearGradient id="gradA" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#02616B"/>
+      <stop offset="60%" stop-color="#3FAEB5"/>
+      <stop offset="100%" stop-color="#8ED2D5" stop-opacity="0.08"/>
+    </linearGradient></defs>
+  
+  <polyline points="92,297 206,6 303,297 342,6 454,252 566,6 606,297" fill="none" stroke="#0EA3AC" stroke-width="58" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.48,10.733714285714285) scale(0.032914285714285715)"/>
+        <polyline points="92,297 206,6 300,175" fill="none" stroke="#0EA3AC" stroke-width="58" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" transform="translate(4.48,10.733714285714285) scale(0.032914285714285715)"/>
+</svg>

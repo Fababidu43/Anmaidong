@@ -1,0 +1,8 @@
+<svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+  <path d="M40,50 C140,10 260,150 380,120" fill="none" stroke="#8ED2D5" stroke-width="1.6" stroke-dasharray="5 5"/>
+  <path d="M40,50 C140,10 260,150 380,120" fill="none" stroke="#0EA3AC" stroke-width="2.4"/>
+  <circle cx="40" cy="50" r="5" fill="#045A65"/>
+  <circle cx="380" cy="120" r="5" fill="#045A65"/>
+  <text x="14" y="36" font-family="Montserrat Bold" font-size="10" fill="#045A65" letter-spacing="0.5">SHANGHAI</text>
+  <text x="320" y="108" font-family="Montserrat Bold" font-size="10" fill="#045A65" letter-spacing="0.5">EUROPE</text>
+</svg>

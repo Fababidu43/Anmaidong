@@ -1,0 +1,21 @@
+<svg viewBox="0 0 2000 440.0" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradM" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#03737D"/>
+      <stop offset="35%" stop-color="#0EA3AC"/>
+      <stop offset="68%" stop-color="#8ED2D5"/>
+      <stop offset="100%" stop-color="#EAF7F8"/>
+    </linearGradient>
+    <linearGradient id="gradA" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#02616B"/>
+      <stop offset="60%" stop-color="#3FAEB5"/>
+      <stop offset="100%" stop-color="#8ED2D5" stop-opacity="0.08"/>
+    </linearGradient></defs>
+  
+  <g transform="translate(60.0,127.47428571428571) scale(0.5782857142857143)">
+    <polyline points="92,297 206,6 303,297 342,6 454,252 566,6 606,297" fill="none" stroke="#0A1626" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="92,297 206,6 300,175" fill="none" stroke="#0A1626" stroke-width="58" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+  </g>
+  <text x="524.8" y="202.4" font-family="Cormorant Garamond SemiBold" font-size="132.0" fill="#0A1626" letter-spacing="3.3000000000000003">ANMAIDONG</text>
+  <text x="524.8" y="277.2" font-family="Montserrat Bold" font-size="44.0" fill="#0A1626" letter-spacing="5.720000000000001">SOURCING &amp; QUALITY CONTROL</text>
+</svg>

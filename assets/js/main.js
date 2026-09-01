@@ -33,6 +33,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if(href === path || (href === 'index.html' && path === '')) a.classList.add('active');
   });
 
+  /* Sliding nav indicator — pill glides between links on hover, rests under the active page */
+  const navLinks = document.querySelector('.nav-links');
+  if(navLinks){
+    const indicator = document.createElement('span');
+    indicator.className = 'nav-indicator';
+    navLinks.appendChild(indicator);
+    const topLinks = Array.from(navLinks.children).filter(el => el.tagName === 'LI').map(li => li.querySelector(':scope > a'));
+    function moveIndicatorTo(link){
+      if(!link) { indicator.style.opacity = '0'; return; }
+      const linkRect = link.getBoundingClientRect();
+      const wrapRect = navLinks.getBoundingClientRect();
+      indicator.style.width = linkRect.width + 'px';
+      indicator.style.transform = `translateX(${linkRect.left - wrapRect.left}px)`;
+    }
+    function restToActive(){
+      const active = topLinks.find(a => a && a.classList.contains('active'));
+      moveIndicatorTo(active);
+    }
+    topLinks.forEach(link => {
+      if(!link) return;
+      link.addEventListener('mouseenter', () => moveIndicatorTo(link));
+    });
+    navLinks.addEventListener('mouseleave', restToActive);
+    requestAnimationFrame(() => { restToActive(); navLinks.classList.add('indicator-ready'); });
+    window.addEventListener('resize', restToActive);
+  }
+
   /* Split-text headline reveal — wraps words for a staggered rise-in on scroll */
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-split]').forEach(el => {
@@ -96,6 +123,20 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
 
+  /* FAQ category filter */
+  const faqTabs = document.querySelectorAll('.faq-tab');
+  const faqItems = document.querySelectorAll('.faq-item[data-cat]');
+  faqTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      faqTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      faqItems.forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+  });
+
   /* FAQ accordion */
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
@@ -106,27 +147,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* Timeline scrollytelling — fills progress line and highlights active step */
-  const timelineWrap = document.querySelector('.timeline-wrap');
-  if(timelineWrap){
-    const fill = timelineWrap.querySelector('.timeline-fill');
-    const rows = timelineWrap.querySelectorAll('.t-row');
-    function updateTimeline(){
-      const rect = timelineWrap.getBoundingClientRect();
+  /* "Notre méthode" — vertical timeline: progress line fills and each step lights up as it's reached */
+  const methodWrap = document.querySelector('.method-wrap');
+  if(methodWrap){
+    const fill = methodWrap.querySelector('.method-fill');
+    const rows = methodWrap.querySelectorAll('.method-row');
+    function updateMethod(){
+      const rect = methodWrap.getBoundingClientRect();
       const vh = window.innerHeight;
-      const totalH = timelineWrap.offsetHeight;
+      const totalH = methodWrap.offsetHeight;
       const start = vh * 0.75;
       const progressPx = Math.min(Math.max(start - rect.top, 0), totalH);
-      const pct = (progressPx / totalH) * 100;
+      const pct = totalH > 0 ? (progressPx / totalH) * 100 : 0;
       if(fill) fill.style.height = pct + '%';
       rows.forEach(row => {
-        const rowTop = row.offsetTop;
-        row.classList.toggle('active', progressPx >= rowTop + 10);
+        row.classList.toggle('active', progressPx >= row.offsetTop + 10);
       });
     }
-    document.addEventListener('scroll', updateTimeline, {passive:true});
-    window.addEventListener('resize', updateTimeline);
-    updateTimeline();
+    document.addEventListener('scroll', updateMethod, {passive:true});
+    window.addEventListener('resize', updateMethod);
+    updateMethod();
   }
 
   /* Console typewriter log (hero) */
@@ -174,15 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* Cursor spotlight — radial glow follows pointer on dark panels */
-  if(window.matchMedia('(pointer: fine)').matches){
-    document.querySelectorAll('.spotlight').forEach(panel => {
-      panel.addEventListener('mousemove', (e) => {
-        const r = panel.getBoundingClientRect();
-        panel.style.setProperty('--sx', ((e.clientX - r.left) / r.width * 100) + '%');
-        panel.style.setProperty('--sy', ((e.clientY - r.top) / r.height * 100) + '%');
-      });
-    });
+  /* Back to top button */
+  const backToTop = document.querySelector('.back-to-top');
+  if(backToTop){
+    function toggleBackToTop(){ backToTop.classList.toggle('visible', window.scrollY > 700); }
+    document.addEventListener('scroll', toggleBackToTop, {passive:true});
+    toggleBackToTop();
+    backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'}));
   }
 
   /* Parallax — lightweight scroll-linked drift on decorative elements */
